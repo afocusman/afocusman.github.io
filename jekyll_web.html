@@ -10,19 +10,19 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="South China, Seismic, South China, " />
+<meta name="keywords" content="Seismic, Seismic, " />
 
-<meta property="og:title" content="Linux下截图工具：scrot 从入门到精通 "/>
-<meta property="og:url" content="https://afocusman.github.io/apps-scrot.html" />
+<meta property="og:title" content="jekyll网站布局 "/>
+<meta property="og:url" content="https://afocusman.github.io/jekyll_web.html" />
 <meta property="og:description" content="" />
 <meta property="og:site_name" content="afocusman Blog" />
 <meta property="og:article:author" content="afocusman" />
 <meta property="og:article:published_time" content="2014-05-06T17:08:00+08:00" />
 <meta property="" content="2015-02-10T16:29:00+08:00" />
-<meta name="twitter:title" content="Linux下截图工具：scrot 从入门到精通 ">
+<meta name="twitter:title" content="jekyll网站布局 ">
 <meta name="twitter:description" content="">
 
-        <title>Linux下截图工具：scrot 从入门到精通  · afocusman Blog
+        <title>jekyll网站布局  · afocusman Blog
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -63,7 +63,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="https://afocusman.github.io/apps-scrot.html"> Linux下截图工具：scrot 从入门到精通  </a></h1>
+    <h1><a href="https://afocusman.github.io/jekyll_web.html"> jekyll网站布局  </a></h1>
     </header>
 </div>
 
@@ -72,26 +72,40 @@
 
             
             <p>[TOC]</p>
-<h3>简介：</h3>
-<p>scrot 主要用在命令行下，它使用 imlib2 库来抓取并保存图像。scrot 的使用格式为：scrot [options] [file]。</p>
-<h3>一般用法：</h3>
-<p>就一般而言，使用 scrot 可以抓取整个桌面、某个指定的窗口、以及选择的矩形区域。</p>
-<ul>
-<li>抓取桌面：scrot desktop.png，该命令将当前的整个桌面抓取下来，并保存为 desktop.png 文件。可以在当前的目录中找到此图像文件。</li>
-<li>抓取窗口：scrot -bs window.png，选项 b 使 scrot 在抓取窗口时一同将外边框抓取下来，而 s 选项则让用户选择所要抓取的是何窗口。</li>
-<li>抓取区域：scrot -s rectangle.png，在执行此命令后，使用鼠标拖曳的矩形区域将被 scrot 抓取下来。</li>
-</ul>
-<h3>高级使用</h3>
-<p>对于普通的抓取使用 scrot 的基础便足以应付了。但在某些特殊情况之下，使用 scrot 抓取图像需要讲究一些技巧。</p>
-<ul>
-<li>延时抓取：scrot -cd 10 menu.png，此命令中的 d 选项用于延时抓取图像，其后的 10 代表延时 10 秒；前面的选项 c 显示倒计时。在抓取菜单或是命令提示时，该技巧将充分展示其魔力。</li>
-<li>生成缩图：scrot -t 50% thumb.png，这个命令在抓取图像的同时生成该图像的缩略图。选项 t 将打开此功能，其后的 50% 为原图的缩放百分比。</li>
-<li>更改品质：scrot -q 70 quality.jpg，此命令中的 q 选项用于更改所抓图像的品质，其数值介于 1-100 之间，默认为 75。数值越大，意味着图像品质越高；同时，图像的压缩率也就越低，占用空间越大。</li>
-<li>操作抓图：scrot action.png -e 'mv $f ~/images/'，该命令将抓取的图像移动到 ~/images/ 目录。显然，操作图像的功能由 e 选项开启，其中的 $f 代表原图的路径／文件名。</li>
-</ul>
-<blockquote>
-<p>以上示例皆指定了需要保存的抓图的文件名称。实际上，如果不指定名称，那么 scrot 在抓取图像后会自动使用当前的日期时间、宽度高度的组合来生成文件名称。</p>
-</blockquote>
+<h1>jekyll网站布局</h1>
+<h2>配置用户名</h2>
+<p>打开_config.yml文件，配置title等信息。</p>
+<h2>布局页面</h2>
+<p>打开_data\navigation.yml，输入相关信息。例如。</p>
+<div class="highlight"><pre><span></span>- title:Python
+  url:/python/
+</pre></div>
+
+
+<p>然后会在_site目录下产生一个python文件夹（用于存放md文件转换后的html文件，显示到网站上）</p>
+<h2>建立网站目录</h2>
+<p>在跟目录下建立对应的python目录，并在index.md里面写好索引结构。最好单独指向一个独立的_posts文件夹，用于存放文章。例如：在python文件夹里面的index.md里面，添加如下代码：</p>
+<div class="highlight"><pre><span></span>---
+layout: archive
+permalink: /python/
+title: &quot;Latest Posts in *python*&quot;
+excerpt: &quot;What I&#39;ve learnt, especially through Project Euler <span class="err">&amp;</span> Codeforce&quot;
+---
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;tiles&quot;</span><span class="nt">&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">post</span> <span class="k">in</span> <span class="nv">site.posts</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">if</span> <span class="nv">post.categories</span> <span class="nv">contains</span> <span class="s1">&#39;python&#39;</span> <span class="cp">%}</span>
+        <span class="cp">{%</span> <span class="k">include</span> <span class="nv">post-grid.html</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="nt">&lt;/div&gt;</span><span class="c">&lt;!-- /.tiles --&gt;</span>
+</pre></div>
+
+
+<p>添加完成后保存，然后在根目录下建立_posts文件夹，并在里面建立python文件夹，该python文件夹用于存放*.md（好像md文件必须用日期开始命名，例如：2016-10-19-test.md）文件，发布到网站上。当你写了一个md文件，放到 _post/python里面后，会自动在_site里面的python文件夹下产生对应的html文件</p>
+<h2>建立index of xx目录</h2>
+<p>如果根目录下刚才建立的python文件夹里面没有index.md文件索引结构。仅给里面存放各类文件的话，那就变成了<a href="http://static.zybuluo.com/afocusman/ckfxoiuafjnmo8pijmnhrzyp/image_1avdcsjea18ckkt31t7c1n391t7c9.png">文件列表栏目了</a>。</p>
+<p>Github的jekyll还需要利用rake命令来创建文章，这样才能保证文章的头部含有YAML标签。而faxbox直接编辑文本文件即可。</p>
             
             
             <hr/>
@@ -105,14 +119,11 @@
 <time datetime="2015-02-10T16:29:00+08:00">Feb 10, 2015</time>
 
             <h4>Category</h4>
-            <a class="category-link" href="https://afocusman.github.io/categories.html#south-china-ref">South China</a>
+            <a class="category-link" href="https://afocusman.github.io/categories.html#seismic-ref">Seismic</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://afocusman.github.io/tags.html#seismic-ref">Seismic
                     <span>2</span>
-</a></li>
-                <li><a href="https://afocusman.github.io/tags.html#south-china-ref">South China
-                    <span>1</span>
 </a></li>
             </ul>
 <h4>Contact</h4>
